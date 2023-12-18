@@ -1,8 +1,15 @@
 # Getting started
+## 소프트웨어 준비하기
+PHP, MySQL을 준비하세요.  
+개별적으로 설치하기 번거로우시다면 [XAMPP](https://www.apachefriends.org/)를 사용하세요.
+
+## 필요 버전
+FCA는 PHP 5.6 이상 버전에서 동작합니다.
+
 ## 설치
 그냥 [다운로드]()하세요. 그리고 아무 디렉토리에 압축을 푸세요.
 
-## start MariaDB
+## 데이터베이스 시작하기
 MariaDB 서버를 시작하세요.
 ![K-001](https://github.com/freetercoder/fca/blob/main/capture/K-001.png)
 
