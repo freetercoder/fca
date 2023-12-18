@@ -1,0 +1,8 @@
+{
+    "php.suggest.basic": false,
+    "php.validate.enable": true,
+    "intelephense.environment.phpVersion": "5.6.0",    
+    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
+    "intelephense.environment.documentRoot": "C:\\work\\fca\\fcapi",
+    "intelephense.phpdoc.returnVoid": false
+}
