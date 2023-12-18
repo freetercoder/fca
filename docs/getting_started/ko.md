@@ -4,7 +4,7 @@
 
 ## start MariaDB
 MariaDB 서버를 시작하세요.
-![K-001]()
+![K-001](https://github.com/freetercoder/fca/blob/main/capture/K-001.png)
 
 ## 데이터베이스 생성
 테스트할 데이터베이스를 생성해요.
@@ -32,24 +32,24 @@ php -S localhost:7000
 
 ## 데이터베이스 테이블을 만들어요.
 [http://localhost:7000/__dev/gen.php](http://localhost:7000/__dev/gen.php) 에 접속하세요.
-![K-002]()
+![K-002](https://github.com/freetercoder/fca/blob/main/capture/K-002.png)
 
 1. 커맨드에 `article title content` 를 입력하세요.
 2. APPLY DB를 선택하세요.
 3. create member table을 체크하세요.
 4. generate 버튼을 클릭하세요.
-![K-003]()
+![K-003](https://github.com/freetercoder/fca/blob/main/capture/K-003.png)
 
 SQL RESULT 항목이 나왔는지 확인해요.
-![K-004]()
+![K-004](https://github.com/freetercoder/fca/blob/main/capture/K-004.png)
 
 `article` 테이블과 `member` 테이블이 생성되었는지 확인하세요.
-![K-005]()
-![K-006]()
-![K-007]()
+![K-005](https://github.com/freetercoder/fca/blob/main/capture/K-005.png)
+![K-006](https://github.com/freetercoder/fca/blob/main/capture/K-006.png)
+![K-007](https://github.com/freetercoder/fca/blob/main/capture/K-007.png)
 
 `member` 테이블에 샘플 데이터가 있는지 확인해요.
-![K-008]()
+![K-008](https://github.com/freetercoder/fca/blob/main/capture/K-008.png)
 
 ## API 초안을 생성해요.
 1. [http://localhost:7000/__dev/gen.php](http://localhost:7000/__dev/gen.php) 페이지로 돌아가요.
@@ -59,18 +59,18 @@ SQL RESULT 항목이 나왔는지 확인해요.
 4. Template API Generate 항목을 APPLY FILE을 선택해요.
 5. generate 버튼을 클릭해요.
 
-![K-009]()
+![K-009](https://github.com/freetercoder/fca/blob/main/capture/K-009.png)
 
 FILE RESULT 항목이 나왔는지 확인해요.
-![K-010]()
+![K-010](https://github.com/freetercoder/fca/blob/main/capture/K-010.png)
 
 API 초안이 생성되었는지 확인해요.
-![K-011]()
+![K-011](https://github.com/freetercoder/fca/blob/main/capture/K-011.png)
 
 ## API를 테스트해요.
 ### 데이터 생성 테스트
 자동 생성된 회원의 토큰을 확인해요.
-![K-012]()
+![K-012](https://github.com/freetercoder/fca/blob/main/capture/K-012.png)
 
 1. 테스트 페이지 [http://localhost:7000/__dev/test.php](http://localhost:7000/__dev/test.php) 에 접속해요.
 2. bearer 부분에 자동 생성된 회원의 토큰을 입력해요.
@@ -88,10 +88,10 @@ API 초안이 생성되었는지 확인해요.
 6. send request를 눌러요.
 7. 결과를 확인해요.
 
-![K-013]()
+![K-013](https://github.com/freetercoder/fca/blob/main/capture/K-013.png)
 
 데이터베이스에서도 다시 한번 확인해요.
-![K-014]()
+![K-014](https://github.com/freetercoder/fca/blob/main/capture/K-014.png)
 
 ### 데이터 목록 조회 테스트
 1. 테스트 페이지 [http://localhost:7000/__dev/test.php](http://localhost:7000/__dev/test.php) 로 돌아와요.
@@ -102,7 +102,7 @@ API 초안이 생성되었는지 확인해요.
 6. send request를 눌러요.
 7. 결과를 확인해요.
 
-![K-015]()
+![K-015](https://github.com/freetercoder/fca/blob/main/capture/K-015.png)
 
 ### 데이터 개별 조회 테스트
 1. 테스트 페이지 [http://localhost:7000/__dev/test.php](http://localhost:7000/__dev/test.php) 로 돌아와요.
@@ -113,7 +113,7 @@ API 초안이 생성되었는지 확인해요.
 6. send request를 눌러요.
 7. 결과를 확인해요.
 
-![K-016]()
+![K-016](https://github.com/freetercoder/fca/blob/main/capture/K-016.png)
 
 ### 데이터 수정 테스트
 1. 테스트 페이지 [http://localhost:7000/__dev/test.php](http://localhost:7000/__dev/test.php) 에 접속해요.
@@ -132,14 +132,14 @@ API 초안이 생성되었는지 확인해요.
 6. send request를 눌러요.
 7. 결과를 확인해요.
 
-![K-017]()
+![K-017](https://github.com/freetercoder/fca/blob/main/capture/K-017.png)
 
 실패했어요! `bearer`가 비어있기 때문에 인증되지 않았다는 오류가 보여요.
-![K-018]()
+![K-018](https://github.com/freetercoder/fca/blob/main/capture/K-018.png)
 
 1. `bearer`를 채우고 다시 send request를 눌러요.
 
-![K-019]()
+![K-019](https://github.com/freetercoder/fca/blob/main/capture/K-019.png)
 
 ### 데이터 삭제 테스트
 1. 테스트 페이지 [http://localhost:7000/__dev/test.php](http://localhost:7000/__dev/test.php) 에 접속해요.
@@ -148,3 +148,5 @@ API 초안이 생성되었는지 확인해요.
 4. URL 은 `/article/1`을 입력해요.
 5. send request를 눌러요.
 6. 결과를 확인해요.
+
+![K-020](https://github.com/freetercoder/fca/blob/main/capture/K-020.png)
