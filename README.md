@@ -37,7 +37,7 @@ CREATE TABLE `article`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;    
 ```
-그리고, 데이터베이스 테이블을 바로 생성하는 것도 가능합니다.
+그리고, 데이터베이스 테이블을 바로 생성하는 것도 가능합니다. [시작하기](https://github.com/freetercoder/fca/blob/main/docs/getting_started/ko.md) 를 참고하세요.
 
 ## API 생성
 ### 입력
@@ -76,6 +76,58 @@ function delete(){
     ...
 }
 ```
+
+## HTTP 매개변수
+### 경로 매개변수
+```
+FRequest::path("0");
+```
+### 쿼리 스트링
+```
+FRequest::query("name");
+```
+
+### 폼
+```
+FRequest::form("name");
+```
+
+### JSON
+```
+FRequest::json("item.child.name");
+```
+
+## 데이터베이스
+### native query
+#### select all entities
+```
+FDB::query_all($query)
+```
+#### select single entity
+```
+FDB::query_first($query, ["id" => $id]);
+```
+
+### query wrapper
+#### first entity
+```
+FDB::first("article", "id", $id);
+```
+비슷한 함수로 `first_or_401`, `first_or_404` 도 있습니다.
+
+#### insert
+```
+FDB::insert("article", ["title" => "sample title", "content" => "sample content"]);
+```
+입력 후 입력된 엔티티를 반환하는 `insert_and_return_first` 함수도 있습니다.
+
+#### update
+FDB::update("article", ["id" => "id", "title" => "sample title", "content" => "sample content"]);
+
+수정된 엔티티를 반환하는 `update_and_return_first` 함수도 있습니다.
+
+#### delete
+FDB::delete("article", "id", $id);
 
 # 시작하기
 [한국어](https://github.com/freetercoder/fca/blob/main/docs/getting_started/ko.md)  

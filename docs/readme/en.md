@@ -37,7 +37,7 @@ CREATE TABLE `article`
      PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 ```
-Additionally, it is also possible to create database tables directly.
+Additionally, it is also possible to create database tables directly. Please refer to [Getting Started](https://github.com/freetercoder/fca/blob/main/docs/getting_started/en.md).
 
 ## Create API
 ### input
@@ -77,12 +77,64 @@ function delete(){
 }
 ```
 
+## HTTP parameters
+### path parameters
+```
+FRequest::path("0");
+```
+### query string
+```
+FRequest::query("name");
+```
+
+### form
+```
+FRequest::form("name");
+```
+
+### JSON
+```
+FRequest::json("item.child.name");
+```
+
+## database
+### native query
+#### select all entities
+```
+FDB::query_all($query)
+```
+#### select single entity
+```
+FDB::query_first($query, ["id" => $id]);
+```
+
+### query wrapper
+#### first entity
+```
+FDB::first("article", "id", $id);
+```
+Similar functions include `first_or_401` and `first_or_404`.
+
+#### insert
+```
+FDB::insert("article", ["title" => "sample title", "content" => "sample content"]);
+```
+There is also a function `insert_and_return_first` that returns the entered entity after input.
+
+#### update
+FDB::update("article", ["id" => "id", "title" => "sample title", "content" => "sample content"]);
+
+There is also a function `update_and_return_first` that returns the modified entity.
+
+#### delete
+FDB::delete("article", "id", $id);
+
 # GettingStarted
-[Korean](https://github.com/freetercoder/fca/blob/main/docs/getting_started/ko.md)
+[Korean](https://github.com/freetercoder/fca/blob/main/docs/getting_started/ko.md)  
 [English](https://github.com/freetercoder/fca/blob/main/docs/getting_started/en.md)
 
 # API Reference
-[Korean](https://github.com/freetercoder/fca/blob/main/docs/api_reference/ko.md)
+[Korean](https://github.com/freetercoder/fca/blob/main/docs/api_reference/ko.md)  
 [English](https://github.com/freetercoder/fca/blob/main/docs/api_reference/en.md)
 
 # Deploy
