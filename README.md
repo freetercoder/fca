@@ -1,7 +1,7 @@
 **FCA :: 가장 단순하고 쉽게 API를 구축하는 PHP 프레임워크.**
 
 # 언어별 README
-[한국어](https://github.com/freetercoder/fca/blob/main/README.md)
+[한국어](https://github.com/freetercoder/fca/blob/main/README.md)  
 [English](https://github.com/freetercoder/fca/blob/main/docs/readme/en.md)
 
 # 프로젝트 개요
@@ -19,11 +19,11 @@ FCA의 장점은 다음과 같습니다.
 # 샘플 코드
 ## 테이블 생성
 ### 입력
-```
+```sh
 article title content
 ```
 ### 출력 결과
-```
+```SQL
 CREATE TABLE `article` 
 ( 
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,    
@@ -41,38 +41,40 @@ CREATE TABLE `article`
 
 ## API 생성
 ### 입력
-```
+```sh
 article title content
 ```
 ### 출력 결과
-```
+```PHP
 // internal function for get list.
-function _get_list()
-```
-  
-```
+function _get_list(){
+    ...
+}
+
 // internal function for get item.
 function _get_item(){
-```
-   
-```
+    ...
+}
+
 // GET /article then call get function
 function get(){
-```
-   
-```
+    ...
+}
+
 // POST /article then call post function
 function post(){
-```
-   
-```
+    ...
+}
+
 // PUT /article then call put function
 function put(){
-```
-   
-```
+    ...
+}
+
 // DELETE /article then call post function
 function delete(){
+    ...
+}
 ```
 
 # 시작하기

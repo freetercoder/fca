@@ -1,7 +1,7 @@
 **FCA :: The simplest and easiest PHP framework to build APIs.**
 
 # README for each language
-[Korean](https://github.com/freetercoder/fca/blob/main/README.md)
+[Korean](https://github.com/freetercoder/fca/blob/main/README.md)  
 [English](https://github.com/freetercoder/fca/blob/main/docs/readme/en.md)
 
 # Project Summary
@@ -19,11 +19,11 @@ The advantages of FCA include:
 # sample code
 ## Create table
 ### input
-```
+```sh
 article title content
 ```
 ### Output result
-```
+```SQL
 CREATE TABLE `article`
 (
      `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -41,38 +41,40 @@ Additionally, it is also possible to create database tables directly.
 
 ## Create API
 ### input
-```
+```sh
 article title content
 ```
 ### Output result
-```
+```PHP
 // internal function for get list.
-function_get_list()
-```
-  
-```
+function _get_list(){
+    ...
+}
+
 // internal function for get item.
-function_get_item(){
-```
-   
-```
+function _get_item(){
+    ...
+}
+
 // GET /article then call get function
 function get(){
-```
-   
-```
+    ...
+}
+
 // POST /article then call post function
 function post(){
-```
-   
-```
+    ...
+}
+
 // PUT /article then call put function
 function put(){
-```
-   
-```
+    ...
+}
+
 // DELETE /article then call post function
 function delete(){
+    ...
+}
 ```
 
 # GettingStarted
