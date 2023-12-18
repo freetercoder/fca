@@ -175,3 +175,6 @@ API 초안 PHP 파일이 생성되었는지 확인해요.
 6. 결과를 확인해요.
 
 ![K-020](https://github.com/freetercoder/fca/blob/main/capture/K-020.png)
+
+
+# 5. 코드 둘러보기
