@@ -12,7 +12,7 @@ FCA의 장점은 다음과 같습니다.
 4. MVC를 몰라도 됩니다. Vanilla PHP 방식으로 API 개발이 가능합니다.
 
 # Getting Started
-[한국어](https://github.com/freetercoder/fca/blob/main/docs/getting_started/ko.md)
+[한국어](https://github.com/freetercoder/fca/blob/main/docs/getting_started/ko.md)  
 [English](https://github.com/freetercoder/fca/blob/main/docs/getting_started/en.md)
 
 # API Reference
