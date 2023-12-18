@@ -3,7 +3,7 @@
 PHP, MySQL을 준비하세요.  
 개별적으로 설치하기 번거로우시다면 [XAMPP](https://www.apachefriends.org/)를 사용하세요.
 
-## 1.2. 필요 버전
+## 1.2. 필요한 PHP 버전
 FCA는 PHP 5.6 이상 버전에서 동작합니다.
 
 ## 1.3. FCA 설치
@@ -11,6 +11,7 @@ FCA는 PHP 5.6 이상 버전에서 동작합니다.
 
 ## 1.4. 데이터베이스 시작하기
 MariaDB 서버를 시작하세요.  
+  
 ![K-001](https://github.com/freetercoder/fca/blob/main/capture/K-001.png)
 
 ## 1.5. 데이터베이스 생성
@@ -42,31 +43,35 @@ php -S localhost:7000
 
 # 3. 만들기
 ## 3.1. 데이터베이스 테이블을 만들어요.
+### 3.1.1. Gen 페이지 접속
 1. [http://localhost:7000/__dev/gen.php](http://localhost:7000/__dev/gen.php) 에 접속하세요.  
 ![K-002](https://github.com/freetercoder/fca/blob/main/capture/K-002.png)
 
----
+### 3.1.2. 생성하기
 1. 커맨드에 `article title content` 를 입력하세요.
 2. APPLY DB를 선택하세요.
 3. create member table을 체크하세요.
 4. generate 버튼을 클릭하세요.
 ![K-003](https://github.com/freetercoder/fca/blob/main/capture/K-003.png)
 
----
+### 3.1.3. SQL RESULT 항목 확인하기
 SQL RESULT 항목이 나왔는지 확인해요.
 ![K-004](https://github.com/freetercoder/fca/blob/main/capture/K-004.png)
 
----
+### 3.1.4. 데이터베이스 테이블 확인하기
 `article` 테이블과 `member` 테이블이 생성되었는지 확인하세요.
-![K-005](https://github.com/freetercoder/fca/blob/main/capture/K-005.png)
-![K-006](https://github.com/freetercoder/fca/blob/main/capture/K-006.png)
-![K-007](https://github.com/freetercoder/fca/blob/main/capture/K-007.png)
+![K-005](https://github.com/freetercoder/fca/blob/main/capture/K-005.png)  
+  
+![K-006](https://github.com/freetercoder/fca/blob/main/capture/K-006.png)  
+  
+![K-007](https://github.com/freetercoder/fca/blob/main/capture/K-007.png)  
 
----
-`member` 테이블에 샘플 데이터가 있는지 확인해요.
+### 3.1.5. `member` 샘플 데이터 확인하기
+`member` 테이블에 샘플 데이터가 있는지 확인해요.  
 ![K-008](https://github.com/freetercoder/fca/blob/main/capture/K-008.png)
 
 ## 3.2. API 초안을 생성해요.
+### 3.2.1. 파일 생성하기
 1. [http://localhost:7000/__dev/gen.php](http://localhost:7000/__dev/gen.php) 페이지로 돌아가요.
 2. 커맨드에 `article title content`가 입력되어 있는지 확인해요.
 3. SQL 항목은 ONLY SHOW로 변경해요.
@@ -75,19 +80,20 @@ SQL RESULT 항목이 나왔는지 확인해요.
 5. generate 버튼을 클릭해요.
 
 ![K-009](https://github.com/freetercoder/fca/blob/main/capture/K-009.png)
----
 
+### 3.2.2. FILE RESULT 항목 확인하기
 FILE RESULT 항목이 나왔는지 확인해요.
 ![K-010](https://github.com/freetercoder/fca/blob/main/capture/K-010.png)
----
 
-API 초안이 생성되었는지 확인해요.
+### 3.2.3. 생성된 파일 확인하기
+API 초안 PHP 파일이 생성되었는지 확인해요.
 ![K-011](https://github.com/freetercoder/fca/blob/main/capture/K-011.png)
----
+
 
 # 4. API를 테스트해요.
 ## 4.1. 데이터 생성 테스트
-자동 생성된 회원의 토큰을 확인해요.
+### 4.1.1. 회원 토큰 확인하기
+자동 생성된 회원의 토큰을 확인해요.  
 ![K-012](https://github.com/freetercoder/fca/blob/main/capture/K-012.png)
 
 1. 테스트 페이지 [http://localhost:7000/__dev/test.php](http://localhost:7000/__dev/test.php) 에 접속해요.
@@ -108,7 +114,8 @@ API 초안이 생성되었는지 확인해요.
 
 ![K-013](https://github.com/freetercoder/fca/blob/main/capture/K-013.png)
 
-데이터베이스에서도 다시 한번 확인해요.
+### 4.1.2. 데이터베이스에서도 확인하기
+데이터베이스에서도 다시 한번 확인해요.  
 ![K-014](https://github.com/freetercoder/fca/blob/main/capture/K-014.png)
 
 ## 4.2. 데이터 목록 조회 테스트
@@ -152,7 +159,7 @@ API 초안이 생성되었는지 확인해요.
 
 ![K-017](https://github.com/freetercoder/fca/blob/main/capture/K-017.png)
 
-실패했어요! `bearer`가 비어있기 때문에 인증되지 않았다는 오류가 보여요.
+**실패했어요!** `bearer`가 비어있기 때문에 인증되지 않았다는 오류가 보여요.  
 ![K-018](https://github.com/freetercoder/fca/blob/main/capture/K-018.png)
 
 1. `bearer`를 채우고 다시 send request를 눌러요.
