@@ -1,9 +1,5 @@
 **FCA :: 가장 단순하고 쉽게 API를 구축하는 PHP 프레임워크.**
 
-# 언어별 README
-[한국어](https://github.com/freetercoder/fca/blob/main/README.md)  
-[English](https://github.com/freetercoder/fca/blob/main/docs/readme/en.md)
-
 # 프로젝트 개요
 FCA(**F**reeter **C**oder **A**PI)는 가장 단순하고 쉬운 방법으로 API를 구축할 수 있게 도와주는 PHP 프레임워크입니다.  
 PHP와 MySQL만 설치되어 있다면, 5분 이내에 간단한 API 서버를 구축할 수 있습니다.  
@@ -44,7 +40,7 @@ CREATE TABLE `article`
 ```sh
 article title content
 ```
-### 출력 결과
+### 자동 생성 결과
 #### 목록 반환하기
 ```PHP
 /*
@@ -122,7 +118,7 @@ function post(){
     $member = FAuth::member_exist_or_401();
         
     $params["member_id"] = $member["id"];
-    $article = FDB::insert_and_return_first("article", $params);
+    $article = FDB::insert_and_return_first("article", $params, "id", "title", "content", "member_id");
     return $article;
 }
 ```
@@ -133,10 +129,7 @@ function post(){
     "id": "4",
     "title": "sample title 3",
     "content": "this is sample content 3",
-    "member_id": "1",
-    "visible_status": "public",
-    "insert_dt": "2023-12-19 10:49:01",
-    "update_dt": null
+    "member_id": "1"
 }
 ```
 
@@ -190,13 +183,12 @@ function delete(){
 true
 ```
 
-# 시작하기
-[한국어](https://github.com/freetercoder/fca/blob/main/docs/getting_started/ko.md)  
-[English](https://github.com/freetercoder/fca/blob/main/docs/getting_started/en.md)
+# 튜토리얼
+[하나씩 따라하기](https://github.com/freetercoder/fca/wiki/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0)  
 
-# API 참고
-[한국어](https://github.com/freetercoder/fca/blob/main/docs/api_reference/ko.md)
-[English](https://github.com/freetercoder/fca/blob/main/docs/api_reference/en.md)
+# API
+[API 목록](https://github.com/freetercoder/fca/wiki/API-%EB%AA%A9%EB%A1%9D)
+
 
 # Deploy
 
