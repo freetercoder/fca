@@ -196,14 +196,8 @@ function put(){
 
 function delete(){
     $id = FRequest::path_or_400("0: id");
-    $member_token = FAuth::bearer_or_401();
-    $member = FDB::first_or_401("member", "member_token", $member_token);
-
-    $article = FDB::first_or_404("article", "id", $id);
-    
-    if ($article["member_id"] !== $member["id"]){
-        FResponse::_400_bad_request("article only delete possible by member");
-    }    
+    $article = FDB::first_or_404("article", "id", $id);    
+    FAuth::member_owner_or_400($article["member_id"]);    
     return FDB::delete("{$table_name}", "id", $id);
 }
 CDATA;
