@@ -1,4 +1,5 @@
 <?php
+require_once($_SERVER["DOCUMENT_ROOT"] . "/_fca/core/core.apicall.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/_fca/core/core.array.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/_fca/core/core.auth.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/_fca/core/core.db.php");
