@@ -1,3 +1,5 @@
 .vscode
 run.sh
 fca.zip
+*.jpg
+*.png
