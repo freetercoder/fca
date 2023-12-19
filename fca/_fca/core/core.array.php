@@ -47,6 +47,11 @@ class FArray{
         array_push($this->_array, $value);
         return $this;
     }
+
+    public function map($func){
+        $this->_array = array_map($func, $this->_array);
+        return $this;
+    }
 }
 
 function farray($_array){
