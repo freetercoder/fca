@@ -97,13 +97,26 @@ class FDB{
         }
     }
 
-    public static function first($table, $column, $value){
+    public static function first($table, $column, $value, ...$inc_keys){
         $query = "select * from $table where $column = :value";
-        return self::query_first($query, ["value" => $value]);
+        $ret = self::query_first($query, ["value" => $value]);
+        
+        if (count($inc_keys) === 0){
+            return $ret;
+        }
+
+        $temp_ret = [];
+        foreach($inc_keys as $inc_key){
+            if (array_key_exists($inc_key, $ret)){
+                $temp_ret[$inc_key] = $ret[$inc_key];
+            }
+        }
+        
+        return $temp_ret;
     }
 
-    public static function first_or_401($table, $column, $value){
-        $row = self::first($table, $column, $value);
+    public static function first_or_401($table, $column, $value, ...$inc_keys){
+        $row = self::first($table, $column, $value, ...$inc_keys);
         if ($row === null){
             FResponse::_401_not_authorized();
         }
@@ -111,12 +124,12 @@ class FDB{
         return $row;
     }
 
-    public static function first_or_404($table, $column, $value){
-        $row = self::first($table, $column, $value);
+    public static function first_or_404($table, $column, $value, ...$inc_keys){
+        $row = self::first($table, $column, $value, ...$inc_keys);
         if ($row === null){
             FResponse::_404_not_found();
         }
-
+        
         return $row;
     }
 
@@ -141,9 +154,9 @@ class FDB{
         return $last_insert_id;
     }
 
-    public static function insert_and_return_first($table, $data){
-        $last_insert_id = self::insert($table, $data);
-        return self::first($table, "id", $last_insert_id);
+    public static function insert_and_return_first($table, $data, ...$inc_keys){
+        $last_insert_id = self::insert($table, $data);        
+        return self::first($table, "id", $last_insert_id, ...$inc_keys);
     }
 
     public static function update($table, $data){
@@ -165,10 +178,10 @@ class FDB{
         return true;
     }
 
-    public static function update_and_return_first($table, $data){
+    public static function update_and_return_first($table, $data, ...$inc_keys){
         $upd_result = self::update($table, $data);
         if ($upd_result){
-            return self::first($table, "id", $data["id"]);
+            return self::first($table, "id", $data["id"], ...$inc_keys);
         }
         return false;
     }
