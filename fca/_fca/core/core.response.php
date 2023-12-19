@@ -42,4 +42,12 @@ class FResponse{
         http_response_code(500);
         exit();
     }
+
+    public static function _200_or_500($result = true){
+        if ($result){
+            return self::_200_json($result);
+        }
+
+        return self::_500_internal_error();
+    }
 }

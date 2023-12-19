@@ -198,7 +198,8 @@ function delete(){
     $id = FRequest::path_or_400("0: id");
     $article = FDB::first_or_404("article", "id", $id);    
     FAuth::member_owner_or_400($article["member_id"]);    
-    return FDB::delete("{$table_name}", "id", $id);
+    $query_result = FDB::delete("{$table_name}", "id", $id);
+    return FResponse::_200_or_500($query_result);
 }
 CDATA;
     $template = fstr($template)
