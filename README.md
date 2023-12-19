@@ -37,7 +37,7 @@ CREATE TABLE `article`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;    
 ```
-그리고, 데이터베이스 테이블을 바로 생성하는 것도 가능합니다. [시작하기](https://github.com/freetercoder/fca/blob/main/docs/getting_started/ko.md) 를 참고하세요.
+그리고, 데이터베이스 테이블을 바로 생성하는 것도 가능합니다. [시작하기](https://github.com/freetercoder/fca/wiki/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0) 를 참고하세요.
 
 ## API 생성
 ### 입력
@@ -45,89 +45,150 @@ CREATE TABLE `article`
 article title content
 ```
 ### 출력 결과
+#### 목록 반환하기
 ```PHP
-// internal function for get list.
+/*
+GET /article
+*/  
 function _get_list(){
-    ...
+    $query = "select id, title, content, member_id from article where 1 = 1 and visible_status = 'public' order by insert_dt asc";
+    return FDB::query_all($query);
 }
+```
+  
+**RESPONSE**
+```JSON  
+[
+    {
+        "id": "2",
+        "title": "sample title",
+        "content": "this is sample content",
+        "member_id": "1"
+    },
+    {
+        "id": "3",
+        "title": "sample title 2",
+        "content": "this is sample content 2",
+        "member_id": "1"
+    }
+]
+```
 
-// internal function for get item.
+#### 싱글 아이템 반환하기
+```PHP
+/*
+GET /article/{id}
+*/
 function _get_item(){
-    ...
+    $id = FRequest::path_or_400("0: id");
+    $query = "select title, content, member_id from article where 1 = 1 and visible_status = 'public' and id = :id";
+    return FDB::query_first($query, ["id" => $id]);
 }
+```
+  
+**RESPONSE**
+```JSON
+{
+    "title": "sample title",
+    "content": "this is sample content",
+    "member_id": "1"
+}
+```
 
-// GET /article then call get function
+
+#### 경로 매개변수에 따라 분기하기
+```PHP
+/*GET /article` or `GET /article/{id}
+*/
 function get(){
-    ...
+    return FRequest::path(0) == null ? _get_list() : _get_item();
 }
+```
 
-// POST /article then call post function
-function post(){
-    ...
+#### 데이터 생성하기
+```PHP
+/*
+POST /article
+Authorization bearer 657fdc1c1ae3a3.19476978
+
+{
+    "title": "sample title",
+    "content" : "this is sample content"
 }
+*/
+function post(){    
+    $params = FRequest::param_or_400("title: article.title", "content: article.content");
 
-// PUT /article then call put function
-function put(){
-    ...
+    $member = FAuth::member_exist_or_401();
+        
+    $params["member_id"] = $member["id"];
+    $article = FDB::insert_and_return_first("article", $params);
+    return $article;
 }
+```
+  
+**RESPONSE**
+```JSON
+{
+    "id": "4",
+    "title": "sample title 3",
+    "content": "this is sample content 3",
+    "member_id": "1",
+    "visible_status": "public",
+    "insert_dt": "2023-12-19 10:49:01",
+    "update_dt": null
+}
+```
 
-// DELETE /article then call post function
+#### 데이터 수정하기
+```PHP
+/*
+PUT /article/1
+Authorization bearer 657fdc1c1ae3a3.19476978
+
+{
+    "title": "sample title mod",
+    "content" : "this is sample content mod"
+}
+*/
+function put(){    
+    $params = FRequest::param_or_400("0: id : id", "title: article.title", "content: article.content");
+    $article = FDB::first_or_404("article", "id", $params["id"]);
+    FAuth::member_owner_or_400($article["member_id"]);
+
+    $article = FDB::update_and_return_first("article", $params, "title", "content", "member_id");
+    return $article;
+}
+```
+  
+**RESPONSE**
+```JSON
+{
+    "title": "sample title mod",
+    "content": "this is sample content mod",
+    "member_id": "1"
+}
+```
+
+#### 데이터 삭제하기
+```PHP
+/*
+DELETE /article/1
+Authorization bearer 657fdc1c1ae3a3.19476978
+*/
 function delete(){
-    ...
+    $id = FRequest::path_or_400("0: id");
+    $article = FDB::first_or_404("article", "id", $id);
+    FAuth::member_owner_or_400($article["member_id"]);    
+    $query_result = FDB::delete("article", "id", $id);
+    return FResponse::_200_or_500($query_result);
 }
 ```
-
-## HTTP 매개변수
-### 경로 매개변수
+  
+**RESPONSE**
+```JSON
+true
 ```
-FRequest::path("0");
-```
-### 쿼리 스트링
-```
-FRequest::query("name");
-```
-
-### 폼
-```
-FRequest::form("name");
-```
-
-### JSON
-```
-FRequest::json("item.child.name");
-```
-
-## 데이터베이스
-### native query
-#### select all entities
-```
-FDB::query_all($query)
-```
-#### select single entity
-```
-FDB::query_first($query, ["id" => $id]);
-```
-
-### query wrapper
-#### first entity
-```
-FDB::first("article", "id", $id);
-```
-비슷한 함수로 `first_or_401`, `first_or_404` 도 있습니다.
-
-#### insert
-```
-FDB::insert("article", ["title" => "sample title", "content" => "sample content"]);
-```
-입력 후 입력된 엔티티를 반환하는 `insert_and_return_first` 함수도 있습니다.
-
-#### update
-FDB::update("article", ["id" => "id", "title" => "sample title", "content" => "sample content"]);
-
-수정된 엔티티를 반환하는 `update_and_return_first` 함수도 있습니다.
-
-#### delete
-FDB::delete("article", "id", $id);
 
 # 시작하기
 [한국어](https://github.com/freetercoder/fca/blob/main/docs/getting_started/ko.md)  
