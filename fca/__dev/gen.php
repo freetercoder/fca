@@ -177,7 +177,7 @@ function get(){
 function post(){    
     $params = FRequest::param_or_400({$column_param});
 
-    $member = FAuth::member_exist_or_401();
+    $member = FAuth::bearer_member_or_401();
 
     $params["member_id"] = $member["id"];
     $article = FDB::insert_and_return_first("{$table_name}", $params, "id", {$column_comma_quote}, "member_id");
@@ -188,7 +188,7 @@ function put(){
     $params = FRequest::param_or_400("0: id : id", {$column_param});
     $article = FDB::first_or_404("{$table_name}", "id", $params["id"]);
     
-    FAuth::member_owner_or_400($article["member_id"]);
+    FAuth::bearer_member_owner_or_400($article["member_id"]);
     
     $article = FDB::update_and_return_first("{$table_name}", $params, {$column_comma_quote}, "member_id");
     return $article;
@@ -197,7 +197,7 @@ function put(){
 function delete(){
     $id = FRequest::path_or_400("0: id");
     $article = FDB::first_or_404("article", "id", $id);    
-    FAuth::member_owner_or_400($article["member_id"]);    
+    FAuth::bearer_member_owner_or_400($article["member_id"]);    
     $query_result = FDB::delete("{$table_name}", "id", $id);
     return FResponse::_200_or_500($query_result);
 }

@@ -12,6 +12,8 @@ FCA의 장점은 다음과 같습니다.
 4. MVC를 몰라도 됩니다. Vanilla PHP 방식으로 API 개발이 가능합니다.
 5. Composer가 필요하지 않습니다.
 
+상세한 설명은 [FCA 위키](https://github.com/freetercoder/fca/wiki) 를 참고하세요.  
+
 # 샘플 코드
 ## 테이블 생성
 ### 입력
@@ -115,7 +117,7 @@ Authorization bearer 657fdc1c1ae3a3.19476978
 function post(){    
     $params = FRequest::param_or_400("title: article.title", "content: article.content");
 
-    $member = FAuth::member_exist_or_401();
+    $member = FAuth::bearer_member_or_401();
         
     $params["member_id"] = $member["id"];
     $article = FDB::insert_and_return_first("article", $params, "id", "title", "content", "member_id");
@@ -147,7 +149,7 @@ Authorization bearer 657fdc1c1ae3a3.19476978
 function put(){    
     $params = FRequest::param_or_400("0: id : id", "title: article.title", "content: article.content");
     $article = FDB::first_or_404("article", "id", $params["id"]);
-    FAuth::member_owner_or_400($article["member_id"]);
+    FAuth::bearer_member_owner_or_400($article["member_id"]);
 
     $article = FDB::update_and_return_first("article", $params, "title", "content", "member_id");
     return $article;
@@ -172,7 +174,7 @@ Authorization bearer 657fdc1c1ae3a3.19476978
 function delete(){
     $id = FRequest::path_or_400("0: id");
     $article = FDB::first_or_404("article", "id", $id);
-    FAuth::member_owner_or_400($article["member_id"]);    
+    FAuth::bearer_member_owner_or_400($article["member_id"]);    
     $query_result = FDB::delete("article", "id", $id);
     return FResponse::_200_or_500($query_result);
 }
