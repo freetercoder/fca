@@ -26,9 +26,7 @@ class FApiCall{
                 if ($is_json_request){
                     $data = json_encode($data);
                 }
-
-                var_dump($url);
-                var_dump($data);
+                
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);			 					
               }
               break;
