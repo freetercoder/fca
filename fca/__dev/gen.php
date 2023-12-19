@@ -147,8 +147,9 @@ function gen_api($cmd){
     foreach($columns->val() as $column){
         $column_param->add("\"$column: $table_name.$column\"");
     }
-
     $column_param = $column_param->join(", ");
+
+    $column_comma_quote = $columns->map(function($x){return "'$x'";})->join(", ");
 
     $template_head = <<<'CDATA'
 <?php
@@ -182,7 +183,7 @@ function post(){
     
     // **TODO :: check member_id field.**
     $params["member_id"] = $member["id"];
-    $article = FDB::insert_and_return_first("{$table_name}", $params);
+    $article = FDB::insert_and_return_first("{$table_name}", $params, "id", {$column_comma_quote}, "member_id");
     return $article;
 }
 
@@ -197,7 +198,7 @@ function put(){
         FResponse::_400_bad_request("{$table_name} only modify possible by member");
     }
     
-    $article = FDB::update_and_return_first("{$table_name}", $params);
+    $article = FDB::update_and_return_first("{$table_name}", $params, "id", {$column_comma_quote}, "member_id");
     return $article;
 }
 
@@ -219,6 +220,7 @@ CDATA;
         ->replace('{$table_name}', $table_name)
         ->replace('{$column_comma}', $column_comma)
         ->replace('{$column_param}', $column_param)
+        ->replace('{$column_comma_quote}', $column_comma_quote)        
         ->val();
     return [$table_name, $template_head, $template];
 }
