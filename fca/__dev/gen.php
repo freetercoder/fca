@@ -190,7 +190,7 @@ function put(){
     
     FAuth::member_owner_or_400($article["member_id"]);
     
-    $article = FDB::update_and_return_first("{$table_name}", $params, "id", {$column_comma_quote}, "member_id");
+    $article = FDB::update_and_return_first("{$table_name}", $params, {$column_comma_quote}, "member_id");
     return $article;
 }
 
