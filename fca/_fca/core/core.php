@@ -8,7 +8,3 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/_fca/core/core.request.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/_fca/core/core.response.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/_fca/core/core.str.php");
 
-const FCA = true;
-FImport::php("../user/user.config");
-FImport::php("../user/user.field");
-FImport::api();
