@@ -177,11 +177,8 @@ function get(){
 function post(){    
     $params = FRequest::param_or_400({$column_param});
 
-    // check is login
-    $member_token = FAuth::bearer_or_401();    
-    $member = FDB::first_or_401("member", "member_token", $member_token);
-    
-    // **TODO :: check member_id field.**
+    $member = FAuth::member_exist_or_401();
+
     $params["member_id"] = $member["id"];
     $article = FDB::insert_and_return_first("{$table_name}", $params, "id", {$column_comma_quote}, "member_id");
     return $article;
@@ -189,14 +186,9 @@ function post(){
 
 function put(){    
     $params = FRequest::param_or_400("0: id : id", {$column_param});
-    $member_token = FAuth::bearer_or_401();
-    $member = FDB::first_or_401("member", "member_token", $member_token);
-
     $article = FDB::first_or_404("{$table_name}", "id", $params["id"]);
     
-    if ($article["member_id"] !== $member["id"]){
-        FResponse::_400_bad_request("{$table_name} only modify possible by member");
-    }
+    FAuth::member_owner_or_400($article["member_id"]);
     
     $article = FDB::update_and_return_first("{$table_name}", $params, "id", {$column_comma_quote}, "member_id");
     return $article;
